@@ -36,10 +36,11 @@ def MoveMouse(x, y):
 
     win32api.SetCursorPos((screenx, screeny))
 
-    while x2 < x and y2 < y:
-        x2 = x2 + 1
-        y2 = y2 + 1
+    while x2 < x:
+        x2 = x2 + 1 * 2
+        y2 = y2 + 1 
         time.sleep(0.01)
+        print(f'CursorX: {x2} CursorY: {y2}')
         win32api.SetCursorPos((x2, y2))
 
     #win32api.SetCursorPos((x,y))
