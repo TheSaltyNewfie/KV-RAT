@@ -69,7 +69,7 @@ def parse(args):
     if args[0] == "mm":
         MoveMouse(int(args[1]), int([2]))
     if args[0] == "mmr":
-        moseMouse(int(random.random(returnScreenRes[0])), int(random.random(returnScreenRes[1])))
+        MoveMouse(int(random.random(returnScreenRes[0])), int(random.random(returnScreenRes[1])))
     if args[0] == "bsod":
         bsod(args[1], args[2])
     if args[0] == "exit":
