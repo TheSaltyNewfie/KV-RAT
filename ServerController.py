@@ -14,12 +14,16 @@ server.listen(3)
 def csend(message):
     client.send(bytes(message, "utf-8"))
 
+isUserConnected = False
 
 while True:
     client, address = server.accept()
     print(f"Connection from {address[0]}:{address[1]}")
+    isUserConnected = True
 
-    while True:
+    while isUserConnected:
         userinput = input("Type Command: ")
-        csend(userinput)
-
+        try:
+            csend(userinput)
+        except Exception:
+            print(f"Error: {Exception}")

