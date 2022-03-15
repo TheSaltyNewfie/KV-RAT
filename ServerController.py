@@ -25,5 +25,10 @@ while True:
         userinput = input("Type Command: ")
         try:
             csend(userinput)
-        except Exception:
-            print(f"Error: {Exception}")
+            msg = client.recv(1024)
+            msg = msg.decode("utf-8")
+            msg = msg.lower()
+
+            print(msg)
+        except Exception as e:
+            print(f"Error: {e}")

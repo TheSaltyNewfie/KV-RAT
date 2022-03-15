@@ -8,7 +8,7 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.connect((addr, port))
 
 def csend(message):
-    client.send(bytes(message, "utf-8"))
+    server.send(bytes(message, "utf-8"))
 
 try:
     while True:

