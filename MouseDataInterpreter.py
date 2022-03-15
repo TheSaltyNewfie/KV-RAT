@@ -1,4 +1,5 @@
 import win32api, win32con
+import time
 
 def readIMD(mouseData):
     '''
@@ -20,7 +21,16 @@ def setIMD(mouseData, recordtime):
     This records data from the mouse, can be used to do funny shapes
     '''
     timer = 0
+    ox = 0
+    oy = 0
 
     while timer < recordtime:
-        win32api.GetCursorPos()
+        ox, oy = win32api.GetCursorPos()
+        print(f'X{ox} Y{oy}\n', file=mouseData)
+        timer = timer + 1
+        time.sleep(0.1)
 
+def runIMD(mouseData):
+    for xv in mouseData[0]:
+        for yv in mouseData[1]:
+            win32api.SetMousePos((xv, yv))

