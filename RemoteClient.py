@@ -12,11 +12,12 @@ def csend(message):
 
 try:
     while True:
+        userinput = input("Type Command => ")
+        csend(userinput)
+
         buffer = server.recv(1024)
         buffer = buffer.decode("utf-8")
-        
-        while True:
-            userinput = input("Type Command => ")
-            csend(userinput)
+
+        print(buffer)
 except Exception:
     print(f'Error: {Exception}')
