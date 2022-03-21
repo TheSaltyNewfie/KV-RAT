@@ -1,0 +1,14 @@
+{
+    "version": "0.0.1",
+    "updatedFiles":
+    {
+        "1": "Client.pyw",
+        "2": "MouseData/md1.imd"
+    },
+    "packages":
+    {
+        "1": "pygame",
+        "2": "pywin32"
+    }
+
+}
