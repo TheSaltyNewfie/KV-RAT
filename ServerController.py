@@ -3,7 +3,7 @@ import socket
 import random
 import os
 
-addr = "127.0.0.1"
+addr = "192.168.0.2"
 port = 4560
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -30,5 +30,8 @@ while True:
             msg = msg.lower()
 
             print(msg)
+
+            if msg.startswith("Error occured - Client closing"):
+                isUserConnected = False
         except Exception as e:
             print(f"Error: {e}")
