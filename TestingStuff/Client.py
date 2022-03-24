@@ -13,6 +13,6 @@ while True:
 
     argd = buffer.split(",")
     
-    print(f"{int(argd[0].strip("("))} {argd[1]}")
+    print(f"{argd[0]} {argd[1]}")
 
     #win32api.SetCursorPos(int(argd[0].strip("(")), int(argd[1].strip(")")))
