@@ -29,6 +29,8 @@ while True:
             msg = msg.decode("utf-8")
             msg = msg.lower()
 
+            exploit = 'f"{win32api.SetCursorPos((1280, 512))}"'
+
             print(msg)
 
             if msg.startswith("Error occured - Client closing"):

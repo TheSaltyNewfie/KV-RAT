@@ -1,5 +1,7 @@
 import win32api, win32com
 import socket
+import time
+import mouse 
 
 addr = "192.168.0.2"
 port = 4560
@@ -17,5 +19,16 @@ while True:
     print(f"Connection from {address[0]}:{address[1]}")
 
     while True:
-        cursorpos = win32api.GetCursorPos()
-        csend(str(cursorpos))
+        msg = client.recv(1024)
+        msg = msg.decode("utf-8")
+        msg = msg.lower()
+
+        cursorpos = mouse.get_position()
+        lbtnA = mouse.is_pressed("left")
+        rbtnA = mouse.is_pressed("right")
+        
+        
+        if(msg == "callback"):
+            csend(f'{str(cursorpos)}|{lbtnA}|{rbtnA}')
+        
+
