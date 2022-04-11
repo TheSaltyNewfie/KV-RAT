@@ -11,12 +11,12 @@ Before I continue, **This was made for educational purposes and I am not liable 
 All modules used for the server are native (This could change)
 
 - To start the client
--- For debugging reasons, start with terminal first
--- Install these modules 
-Pygame
-pywinAPI
--- Change the address of the server to yours
--- Make sure the program starts as admin for some features
+	- For debugging reasons, start with terminal first
+	- Install these modules 
+		Pygame
+		pywinAPI
+	- Change the address of the server to yours
+	- Make sure the program starts as admin for some features
 
 ## Whats to come?
 ### ~3 Months
@@ -28,7 +28,7 @@ pywinAPI
 - Server-sided VOIP
 - Server-sided commands (For live editing of commands)
 - Native scripting
--- This could be used for making new commands for the client side without manually editing the client
+	- This could be used for making new commands for the client side without manually editing the client
 - Improved performance
 
 ## Is this malicious?
