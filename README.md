@@ -12,8 +12,8 @@ All modules used for the server are native (This could change)
 
 - To start the client
 	- For debugging reasons, start with terminal first
-	- Install these modules 
-		Pygame
+	- Install these modules, 
+		Pygame,
 		pywinAPI
 	- Change the address of the server to yours
 	- Make sure the program starts as admin for some features
